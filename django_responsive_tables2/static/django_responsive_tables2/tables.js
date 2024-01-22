@@ -11,8 +11,8 @@ function updateHeaders(tableId, url, tableElement) {
                 for (const [key, value] of Object.entries(sortParameters)) {
                     urlParameters[key] = value;
                 }
-                url = clearParameters(url);
-                updateTable(tableId, url + encodeParameters(urlParameters));
+                url = clearParameters(url) + encodeParameters(urlParameters);
+                updateTable(tableId, url);
             };
         }
     }
@@ -30,8 +30,12 @@ function updateTable(tableId, url, search=null) {
             }
         }
     };
-    if (search) xhr.open('GET', url + "?search=" + search, true);
-    else xhr.open('GET', url, true);
+    if (search) {
+        urlParameters = decodeParameters(url);
+        urlParameters["search"] = search;
+        url = clearParameters(url) + encodeParameters(urlParameters);
+    }
+    xhr.open('GET', url, true);
     xhr.send();
 }
 
