@@ -9,7 +9,7 @@
 
     // Load initial values when page is loaded, and add event listeners.
     document.addEventListener("DOMContentLoaded", function() {
-        update_table("{{ table_id }}", "{{ table_url }}");
+        updateTable("{{ table_id }}", "{{ table_url }}");
         searchElement_{{ table_id }}.addEventListener("keyup", keyUp_{{ table_id }});
         searchElement_{{ table_id }}.addEventListener("keydown", keyDown_{{ table_id }});
     });
@@ -27,6 +27,6 @@
 
     //User is finished typing.
     function doneTyping_{{ table_id }}(e) {
-        update_table("{{ table_id }}", "{{ table_url }}", searchElement_{{ table_id }}.value);
+        updateTable("{{ table_id }}", "{{ table_url }}", searchElement_{{ table_id }}.value);
     }
 </script>
