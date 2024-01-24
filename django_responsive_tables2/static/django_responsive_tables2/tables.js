@@ -6,12 +6,7 @@ function updateHeaders(tableId, url, tableElement) {
         for (let y = 0; y < headerLinks.length; y++) {
             headerLinks[y].onclick = function(e) {
                 e.preventDefault();
-                sortParameters = decodeParameters(headerLinks[y].getAttribute('href'));
-                urlParameters = decodeParameters(url);
-                for (const [key, value] of Object.entries(sortParameters)) {
-                    urlParameters[key] = value;
-                }
-                url = clearParameters(url) + encodeParameters(urlParameters);
+                url = buildUrl(url, decodeParameters(headerLinks[y].getAttribute('href')));
                 updateTable(tableId, url);
             };
         }
@@ -31,9 +26,8 @@ function updateTable(tableId, url, search=null) {
         }
     };
     if (search) {
-        urlParameters = decodeParameters(url);
-        urlParameters["search"] = search;
-        url = clearParameters(url) + encodeParameters(urlParameters);
+        let searchParam = {"search": search};
+        url = buildUrl(url, searchParam);
     }
     xhr.open('GET', url, true);
     xhr.send();
@@ -73,4 +67,15 @@ function clearParameters(url) {
     split = url.split("?");
     if (split.length > 1) return split[0];
     else return url;
+}
+
+function buildUrl(url, params, keep_params=true) {
+    let new_params = { };
+    if (keep_params==true) new_params = decodeParameters(url);
+
+    for (const [key, value] of Object.entries(params)) {
+        new_params[key] = value;
+    }
+
+    return clearParameters(url) + encodeParameters(new_params);
 }
