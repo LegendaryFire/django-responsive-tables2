@@ -1,4 +1,4 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 
 with open("README.md", "r") as fh:
     long_description = fh.read()
@@ -11,7 +11,13 @@ setup(
     description="django-tables2 with AJAX searching and pagination.",
     long_description=long_description,
     long_description_content_type="text/markdown",
+    url="https://github.com/LegendaryFire/django-responsive-tables2",
     python_requires='>=3.8',
+    packages=find_packages(),
+    include_package_data=True,
+    setup_requires=[
+        "setuptools-git >= 1.2",
+    ],
     install_requires=[
         'django >= 5.0.0',
         'django_tables2 >= 2.7.0',
