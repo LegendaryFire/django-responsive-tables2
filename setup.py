@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name='django-responsive-tables2',
-    version='0.8.0',
+    version='0.8.1',
     author='Tristan Balon',
     author_email='tristan.balon@outlook.com',
     description="django-tables2 with AJAX searching and pagination.",
